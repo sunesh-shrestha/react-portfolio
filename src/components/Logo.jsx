@@ -5,7 +5,7 @@ function Logo() {
       <polygon points="50,5 93,27 93,73 50,95 7,73 7,27" fill="#4f46e5" />
       <text x="50" y="62" textAnchor="middle" fontSize="36"
             fontWeight="bold" fill="white" fontFamily="Arial, sans-serif">
-        AB
+        SPS
       </text>
     </svg>
   );

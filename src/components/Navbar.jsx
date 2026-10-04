@@ -16,7 +16,7 @@ function Navbar() {
     <header className="navbar">
       <NavLink to="/" className="navbar-brand">
         <Logo />
-        <span>Your Name</span>
+        <span>Sunesh Prasad Shrestha</span>
       </NavLink>
       <nav>
         <ul className="navbar-links">

@@ -9,15 +9,15 @@ function About() {
     },
     {
       title: "Frameworks & Libraries",
-      skills: ["React.js", "Node.js", "Express.js", "ASP.NET", "Bootstrap"]
+      skills: ["React.js", "Node.js", "Express.js"]
     },
     {
       title: "Databases & Storage",
-      skills: ["Oracle DB", "MongoDB", "MySQL", "Firebase"]
+      skills: ["Oracle DB", "MongoDB", "MySQL"]
     },
     {
       title: "Tools & DevOps",
-      skills: ["Git", "GitHub", "VS Code", "Agile/Scrum", "RESTful APIs"]
+      skills: ["Git", "GitHub", "VS Code", "Agile/Scrum", "Docker"]
     }
   ];
 
