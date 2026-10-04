@@ -36,3 +36,151 @@ img { max-width: 100%; display: block; }
 .contact-form input, .contact-form textarea { padding: .6rem; border: 1px solid #cbd5e1; border-radius: 6px; font: inherit; }
 
 .footer { text-align: center; padding: 1.5rem; background: var(--light); }
+
+
+/* About.jsx*/
+:root {
+  --primary-color: #2563eb; /* Royal Blue */
+  --primary-hover: #1d4ed8;
+  --bg-card: #ffffff;
+  --bg-tag: #f1f5f9;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-radius: 12px;
+}
+
+/* Base container structure */
+.about-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-main);
+}
+
+/* Split layout for the Hero section */
+.about-hero {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+}
+
+/* Polished circle layout for your portrait image */
+.profile-image-wrapper {
+  flex-shrink: 0;
+}
+
+.portrait-img {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 4px solid #ffffff;
+  outline: 2px solid var(--primary-color);
+}
+
+/* Typography styles */
+.name-title {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.bio-text p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 15px;
+}
+
+/* Modern Call-To-Action Button */
+.resume-btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 12px 24px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  margin-top: 15px;
+}
+
+.resume-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+/* Skills Layout & Cards */
+.skills-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 40px;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1-fraction));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.skill-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--bg-tag);
+  padding-bottom: 8px;
+}
+
+/* Skill pill/tag formatting */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background-color: var(--bg-tag);
+  color: var(--text-main);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.skill-tag:hover {
+  background-color: #cbd5e1;
+}
