@@ -21,7 +21,7 @@ function Contact() {
 
     // Format parameters into standard form URL structures to bypass extension tracking blocks
     const urlEncodedData = new URLSearchParams();
-    urlEncodedData.append("access_key", "d84a7aeb-1892-449d-8691-d2bca378ec15");
+    urlEncodedData.append("access_key", "3bd2c059-6fdc-44a5-a619-44048b58980f");
     urlEncodedData.append("name", formData.name);
     urlEncodedData.append("email", formData.email);
     urlEncodedData.append("message", formData.message);
