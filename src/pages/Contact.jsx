@@ -24,7 +24,7 @@ function Contact() {
 
     // Matches your snippet's native FormData approach perfectly
     const nativeFormData = new FormData();
-    nativeFormData.append("access_key", "d84a7aeb-1892-449d-8691-d2bca378ec15");
+    nativeFormData.append("access_key", "3bd2c059-6fdc-44a5-a619-44048b58980f");
     nativeFormData.append("name", formData.name);
     nativeFormData.append("email", formData.email);
     nativeFormData.append("message", formData.message);
@@ -39,7 +39,7 @@ function Contact() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        setSubmitMessage("✅ Success! Your message has been sent.");
+        setSubmitMessage("Success! Your message has been sent.");
         setFormData({ name: "", email: "", message: "" }); // Resets form values
         
         // Wait 2 seconds so they read the success message, then redirect home
