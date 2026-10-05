@@ -73,7 +73,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Micro-Metrics Display */}
+      {/* Highlights Grid */}
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 

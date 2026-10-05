@@ -18,8 +18,8 @@ function Contact() {
 
   // Translates your async form event listener into React
   async function handleSubmit(event) {
-    event.preventDefault(); // Equivalent to e.preventDefault()
-    setIsSubmitting(true);   // Disables button and changes text to "Sending..."
+    event.preventDefault(); 
+    setIsSubmitting(true);   
     setSubmitMessage("");
 
     // Matches your snippet's native FormData approach perfectly
@@ -33,16 +33,16 @@ function Contact() {
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: nativeFormData // Disguises request from strict browser trackers
+        body: nativeFormData 
       });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
         setSubmitMessage("Success! Your message has been sent.");
-        setFormData({ name: "", email: "", message: "" }); // Resets form values
+        setFormData({ name: "", email: "", message: "" }); 
         
-        // Wait 2 seconds so they read the success message, then redirect home
+      
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -52,7 +52,7 @@ function Contact() {
     } catch (error) {
       setSubmitMessage("❌ Something went wrong. Please check your tracking extensions and try again.");
     } finally {
-      setIsSubmitting(false); // Restores button text and reactivates it
+      setIsSubmitting(false); 
     }
   }
 

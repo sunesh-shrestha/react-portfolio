@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css'; // Make sure to add the CSS file below!
+import '../index.css'; // 
 
 function About() {
   const skillCategories = [
@@ -57,7 +57,7 @@ function About() {
         </div>
       </div>
 
-      {/* Modern Grid Layout for Skills */}
+      {/*Layout for Skills */}
       <div className="skills-section">
         <h2 className="section-title">Technical Toolkit</h2>
         <div className="skills-grid">
