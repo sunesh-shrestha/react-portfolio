@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function Contact() {
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(""); // Holds "success" or "error"
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const [formData, setFormData] = useState({
     name: "", 
@@ -14,43 +16,43 @@ function Contact() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   }
 
+  // Translates your async form event listener into React
   async function handleSubmit(event) {
-    event.preventDefault(); // Prevents browser redirection crash
-    setIsSubmitting(true);
-    setSubmitStatus("");
+    event.preventDefault(); // Equivalent to e.preventDefault()
+    setIsSubmitting(true);   // Disables button and changes text to "Sending..."
+    setSubmitMessage("");
 
-    // Format parameters into standard form URL structures to bypass extension tracking blocks
-    const urlEncodedData = new URLSearchParams();
-    urlEncodedData.append("access_key", "3bd2c059-6fdc-44a5-a619-44048b58980f");
-    urlEncodedData.append("name", formData.name);
-    urlEncodedData.append("email", formData.email);
-    urlEncodedData.append("message", formData.message);
-    urlEncodedData.append("subject", `New Portfolio Message from ${formData.name}`);
+    // Matches your snippet's native FormData approach perfectly
+    const nativeFormData = new FormData();
+    nativeFormData.append("access_key", "d84a7aeb-1892-449d-8691-d2bca378ec15");
+    nativeFormData.append("name", formData.name);
+    nativeFormData.append("email", formData.email);
+    nativeFormData.append("message", formData.message);
+    nativeFormData.append("subject", `New Portfolio Message from ${formData.name}`);
 
     try {
-      const response = await fetch("https://web3forms.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Accept": "application/json"
-        },
-        body: urlEncodedData.toString()
+        body: nativeFormData // Disguises request from strict browser trackers
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
-      if (result.success) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+      if (response.ok && data.success) {
+        setSubmitMessage("✅ Success! Your message has been sent.");
+        setFormData({ name: "", email: "", message: "" }); // Resets form values
+        
+        // Wait 2 seconds so they read the success message, then redirect home
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
-        setSubmitStatus("error");
-        console.error("Web3Forms error details:", result);
+        setSubmitMessage("❌ Error: " + (data.message || "Failed to send."));
       }
     } catch (error) {
-      console.error("Submission crash caught:", error);
-      setSubmitStatus("error");
+      setSubmitMessage("❌ Something went wrong. Please check your tracking extensions and try again.");
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Restores button text and reactivates it
     }
   }
 
@@ -65,7 +67,6 @@ function Contact() {
         </p>
       </div>
 
-      {/* Side-by-Side Flex Layout */}
       <div style={{ display: 'flex', gap: '50px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
         
         {/* Left Side: Contact Information Panel */}
@@ -91,84 +92,67 @@ function Contact() {
           </div>
         </div>
 
-        {/* Right Side: Contact Form Input Wrapper */}
-        <div style={{ flex: '2 1 450px' }}>
-          {submitStatus === "success" ? (
-            <div style={{
-              backgroundColor: 'var(--bg-tag)',
-              borderLeft: '4px solid #22c55e',
-              padding: '24px',
-              borderRadius: 'var(--border-radius)',
-              color: 'var(--text-main)',
-              fontSize: '1.1rem'
-            }}>
-              <h3 style={{ margin: '0 0 8px 0', color: '#16a34a', fontWeight: '700' }}>Message Received!</h3>
-              Thank you for reaching out, Sunesh. Your message has been sent directly to my inbox. I will get back to you shortly.
+        {/* Right Side: Form Block */}
+        <form onSubmit={handleSubmit} style={{ flex: '2 1 450px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
+            Full Name
+            <input 
+              name="name" 
+              value={formData.name} 
+              onChange={handleChange} 
+              required 
+              style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+            />
+          </label>
+
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
+            Email Address
+            <input 
+              name="email" 
+              type="email" 
+              value={formData.email} 
+              onChange={handleChange} 
+              required 
+              style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
+            />
+          </label>
+
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
+            Message
+            <textarea 
+              name="message" 
+              rows="5" 
+              value={formData.message} 
+              onChange={handleChange} 
+              required 
+              style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical' }}
+            />
+          </label>
+
+          {/* Inline alert box replacing messy window browser popups */}
+          {submitMessage && (
+            <div style={{ fontSize: '0.95rem', fontWeight: '600', color: 'var(--text-main)', marginTop: '5px' }}>
+              {submitMessage}
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              
-              {/* Row 1: Full Name field */}
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
-                Full Name
-                <input 
-                  name="name" 
-                  value={formData.name} 
-                  onChange={handleChange} 
-                  required 
-                  style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                />
-              </label>
-
-              {/* Row 2: Email field */}
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
-                Email Address
-                <input 
-                  name="email" 
-                  type="email" 
-                  value={formData.email} 
-                  onChange={handleChange} 
-                  required 
-                  style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem' }}
-                />
-              </label>
-
-              {/* Row 3: Message field */}
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.9rem', fontWeight: '600' }}>
-                Message
-                <textarea 
-                  name="message" 
-                  rows="5" 
-                  value={formData.message} 
-                  onChange={handleChange} 
-                  required 
-                  style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '1rem', resize: 'vertical' }}
-                />
-              </label>
-
-              {submitStatus === "error" && (
-                <div style={{ color: '#ef4444', fontSize: '0.95rem', fontWeight: '600' }}>
-                  ❌ An unexpected error occurred. Please check your network context or try again.
-                </div>
-              )}
-
-              <button 
-                type="submit" 
-                className="resume-btn" 
-                disabled={isSubmitting}
-                style={{ 
-                  marginTop: '10px', 
-                  alignSelf: 'flex-start', 
-                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  opacity: isSubmitting ? 0.7 : 1,
-                  border: 'none'
-                }}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
-            </form>
           )}
-        </div>
+
+          <button 
+            type="submit" 
+            className="resume-btn" 
+            disabled={isSubmitting}
+            style={{ 
+              marginTop: '10px', 
+              alignSelf: 'flex-start', 
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              opacity: isSubmitting ? 0.7 : 1,
+              border: 'none'
+            }}
+          >
+            {/* Toggles text reactively based on network states */}
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </button>
+        </form>
 
       </div>
     </section>
