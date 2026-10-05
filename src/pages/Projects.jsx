@@ -6,13 +6,13 @@ const projectList = [
     title: "Interactive Restaurant Menu",
     image: "/Menu.png", 
     description: "A highly responsive digital menu card application that offers seamless, mobile-optimized browsing. Built using structured, semantic layouts and clean component design, it delivers an intuitive user interface for modern dining exploration.",
-    liveLink: "https://sunesh-shrestha.github.io/Menu/"
+    liveLink: "https://sunesh-shrestha.github.io/The-Mule-Bar-Grill/"
   },
   {
     title: "The Mule Bar & Grill",
     image: "/Mule_bar.png", 
     description: "A comprehensive restaurant platform interface engineered with strict cohesive styling and optimized branding architecture. It integrates accessible menu structures and responsive components tailored to enhance public commercial web presence.",
-    liveLink: "https://sunesh-shrestha.github.io/The-Mule-Bar-Grill/"
+    liveLink: "https://sunesh-shrestha.github.io/Menu//"
   }
 ];
 
